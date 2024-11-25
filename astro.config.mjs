@@ -41,8 +41,8 @@ export default defineConfig({
 		}
 	},
 	prefetch: true,
-	output: 'server',
-	outDir: './dist',
+	output: 'static',
+	// outDir: './dist',
 	adapter: vercel({
 		webAnalytics: { enabled: true }
 	})
