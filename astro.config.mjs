@@ -8,6 +8,7 @@ import rehypeExternalLinks from 'rehype-external-links';
 import expressiveCode from 'astro-expressive-code';
 import { expressiveCodeOptions } from './src/site.config';
 import icon from 'astro-icon';
+import cloudeflare from '@astrojs/cloudflare';
 
 // import vercel from '@astrojs/vercel/serverless';
 
@@ -40,10 +41,8 @@ export default defineConfig({
 			}
 		}
 	},
+	output: 'static',
+	adapter: cloudeflare()
 	// prefetch: true,
-	// output: 'static',
 	// outDir: './dist',
-	// adapter: vercel({
-	// 	webAnalytics: { enabled: true }
-	// })
 });
