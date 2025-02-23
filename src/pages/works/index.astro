@@ -1,0 +1,103 @@
+---
+import PageLayout from '@/layouts/BaseLayout.astro'
+import Button from '@/components/Button.astro'
+import Section from '@/components/Section.astro'
+import Card from '@/components/Card.astro'
+
+---
+
+<PageLayout meta={{ title: 'Home' }}>
+	<div class='w-full'>
+    <!-- button back home -->
+		<Button title='Back' href='/' style='button'>
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				width='14'
+				height='14'
+				viewBox='0 0 24 24'
+				slot='icon-before'
+			>
+				<path
+					fill='currentColor'
+					d='m6.921 12.5l5.792 5.792L12 19l-7-7l7-7l.713.708L6.921 11.5H19v1z'
+				>
+				</path>
+			</svg>
+		</Button>
+
+		<div class='mt-5 flex w-full flex-col gap-y-10'>
+            <!-- title -->
+			<div>
+				<h1 class='mb-1 text-2xl font-bold'>Work Experience</h1>
+				<p>Building Careers, One Role at a Time</p>
+			</div>
+
+			<Card
+				heading='TOMPS by Telkom Indonesia'
+				subheading='Software Engineer - Backend Developer'
+				date='February 2023 - present'
+				altText='Tomps Indonesia'
+				imageClass='h-12 w-auto md:-left-16'
+			>
+				<ul class='ml-4 list-disc text-muted-foreground'>
+					<li>
+						Created APIs and integrated them with frontend and mobile developers for Tomps Building
+						app and website.
+					</li>
+					<li>Integrated payment systems into Tomps SaaS for purchasing various Tomps products.</li>
+					<li>Implemented stored procedures (SP) in PostgreSQL databases.</li>
+					<li>Used transaction queries for database operations.</li>
+				</ul>
+			</Card>
+			<Card
+				heading='Telkom Indonesia'
+				subheading='Software Engineer - Backend Developer'
+				date='February 2021 - January 2023'
+				altText='Telkom Indonesia'
+				imageClass='h-12 w-auto md:-left-16'
+			>
+				<ul class='ml-4 list-disc text-muted-foreground'>
+					<li>Worked on multiple projects, primarily using the NodeJS framework and APIs.</li>
+					<li>Applied microservice architecture for software development.</li>
+					<li>
+						Implemented third-party integrations (payment systems, mailers, and notifications).
+					</li>
+					<li>Set up authentication using JWT, crypto, and passport auth in NodeJS.</li>
+					<li>Utilized Socket.IO, Cron jobs, and message brokers (Kafka).</li>
+					<li>Applied unit testing tools ( Chai, Mocha, and Sinon) for code quality control.</li>
+					<li>
+						Implemented encryption for security, using cryptographic techniques to protect sensitive
+						data.
+					</li>
+					<li>Managed databases and queries in MongoDB and MariaDB.</li>
+				</ul>
+			</Card>
+			<Card
+				heading='Indonesia Comnets Plus (ICON +) '
+				subheading='IT Support Engineer'
+				date='November 2019 - Agustus 2020'
+				altText='Indonesia Comnets (ICON) Plus'
+				imageClass='h-12 w-auto md:-left-16'
+			>
+				<ul class='ml-4 list-disc text-muted-foreground'>
+					<li>
+						Respond to user inquiries, troubleshoot issues related to software, hardware, and
+						network systems, and provide real-time solutions to technical problems.
+					</li>
+					<li>
+						Regularly monitor and maintain computer systems, servers, and network hardware to
+						prevent downtime and ensure optimal performance.
+					</li>
+					<li>
+						Install, configure, and upgrade hardware (e.g., computers, printers) and software (e.g.,
+						operating systems, applications) for users.
+					</li>
+					<li>
+						Provide training and support to employees on software applications, system usage, and
+						best practices for IT security.
+					</li>
+				</ul>
+			</Card>
+		</div>
+	</div>
+</PageLayout>
