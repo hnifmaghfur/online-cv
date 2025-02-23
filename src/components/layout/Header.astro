@@ -57,9 +57,17 @@
 
 <script>
 	function getCurrentTheme() {
-		return localStorage.getItem('theme')
+		return localStorage.getItem('theme') ?? 'dark'
 	}
 	const toggleDarkModeButton = document.getElementById('toggleDarkMode')
+
+	// Set initial theme to dark if not set
+	if (!localStorage.getItem('theme')) {
+		const initialThemeEvent = new CustomEvent('theme-change', {
+			detail: { theme: 'dark' }
+		})
+		document.dispatchEvent(initialThemeEvent)
+	}
 
 	toggleDarkModeButton?.addEventListener('click', () => {
 		const toggleDarkModeEvent = new CustomEvent('theme-change', {
