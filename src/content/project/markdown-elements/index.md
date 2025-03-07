@@ -1,8 +1,11 @@
 ---
-title: "This is post from Project"
-description: "This post is for testing and listing a number of different markdown elements "
+title: "Lorem Ipsum"
+description: "This post is for testing and listing a number of different markdown elements and still updated "
 publishDate: "22 Feb 2023"
 updatedDate: 22 Jan 2024
+coverImage:
+  src: "./logo.png"
+  alt: "Astro build wallpaper"
 tags: ["test", "markdown"]
 ---
 
