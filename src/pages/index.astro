@@ -2,52 +2,51 @@
 import PageLayout from '../layouts/BaseLayout.astro'
 import Section from '../components/Section.astro'
 import Card from '../components/Card.astro'
-import ProjectCard from '../components/ProjectCard.astro'
 import Label from '../components/Label.astro'
 import SkillLayout from '../components/SkillLayout.astro'
 import PostPreview from '@/components/blog/PostPreview.astro'
 import ProjectSection from '@/components/ProjectSection.astro'
 
+import { getAllProjects, sortProjectByDate } from '@/utils'
 import { getAllPosts, sortMDByDate } from '@/utils'
 
 const skills = [
-	'Javascript',
 	'Typescript',
+	'Javascript',
 	'Golang',
+	'PostgreSQL',
+	'MariaDB',
+	'MongoDB',
+	'Redis',
 	'Rest API',
+	'WebSocket',
 	'Kafka',
 	'Integration Payment',
 	'Integration Mailer',
 	'Integration Notification',
 	'Microservice',
+	'Docker',
 	'Express',
-	'Socket IO',
 	'Unit Testing',
-	'MariaDB',
-	'MongoDB',
-	'PostgreSQL',
 	'SonarQube'
 ]
 
 const MAX_POSTS = 10
 const allPosts = await getAllPosts()
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
+const allProjects = await getAllProjects()
+const allProjectsByDate = sortProjectByDate(allProjects).slice(0, 2)
 ---
 
 <PageLayout meta={{ title: 'Home' }}>
 	<div class='flex w-full flex-col gap-y-10'>
+		<!-- Hanif -->
 		<section class='flex flex-col items-center gap-y-7'>
-
 			<div class='flex flex-col items-center gap-y-4'>
 				<h1 class='text-3xl font-bold'>Hanif Maghfur</h1>
 				<h1 class='text-xl'>Software Engineer - Backend Developer</h1>
 				<div class='flex flex-wrap justify-center gap-x-7 gap-y-3'>
-					<Label
-						title='hanif@maghfur.dev'
-						as='a'
-						href='mailto:hanif@maghfur.dev'
-						target='_blank'
-					>
+					<Label title='hanif@maghfur.dev' as='a' href='mailto:hanif@maghfur.dev' target='_blank'>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							viewBox='0 0 16 16'
@@ -98,6 +97,7 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 			</div>
 		</section>
 
+		<!-- About -->
 		<Section title='About'>
 			<p class='text-muted-foreground'>
 				A Backend Developer with 4 years of experience, specializing in designing, building, and
@@ -105,16 +105,40 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 				payment systems, mailers, notifications). Adept at working both collaboratively within teams
 				and independently, ensuring efficient and scalable backend solutions.
 			</p>
+			<!-- Download CV -->
+			<div class='flex justify-center'>
+				<a
+					href='https://drive.google.com/file/d/1FudBnDez--NpAuZn4DKlmCv9c2vvncpV/view?usp=sharing'
+					class='inline-flex items-center gap-x-2 rounded-md border border-border px-4 py-2 text-sm font-medium transition-colors hover:bg-border'
+					target='_blank'
+				>
+					Download CV
+					<svg xmlns='http://www.w3.org/2000/svg' class='h-4 w-4' viewBox='0 0 24 24'>
+						<path
+							fill='none'
+							stroke='currentColor'
+							stroke-linecap='round'
+							stroke-linejoin='round'
+							stroke-width='2'
+							d='M5 12h14m-7-7l7 7l-7 7'
+						>
+						</path>
+					</svg>
+				</a>
+			</div>
 		</Section>
 
+		<!-- Skills -->
 		<Section title='Skills'>
 			<SkillLayout skills={skills} />
 		</Section>
-		
+
+		<!-- Projects -->
 		<Section title='Projects'>
 			<ProjectSection />
 		</Section>
 
+		<!-- Work Experience -->
 		<Section title='Work Experience'>
 			<Card
 				heading='TOMPS by Telkom Indonesia'
@@ -211,7 +235,7 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 			/>
 		</Section> -->
 
-
+		<!-- Certificate -->
 		<Section title='Certifications'>
 			<Card
 				as='a'

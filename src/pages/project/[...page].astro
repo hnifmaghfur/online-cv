@@ -1,0 +1,114 @@
+---
+export const prerender = true
+
+import type { GetStaticPaths, Page } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+
+import ProjectCard from '@/components/ProjectCard.astro'
+import Button from '@/components/Button.astro'
+import Pagination from '@/components/Paginator.astro'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import { getAllProjects, getUniqueProjectTags, sortProjectByDate } from '@/utils'
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const allProjects = await getAllProjects()
+	const allProjectsByDate = sortProjectByDate(allProjects)
+	const uniqueTags = getUniqueProjectTags(allProjects)
+	return paginate(allProjectsByDate, { pageSize: 10, props: { uniqueTags } })
+}) satisfies GetStaticPaths
+
+interface Props {
+	page: Page<CollectionEntry<'project'>>
+	uniqueTags: string[]
+}
+
+const { page, uniqueTags } = Astro.props
+
+const meta = {
+	description: 'Projects',
+	title: 'Projects'
+}
+
+// const paginationProps = {
+// 	...(page.url.prev && {
+// 		prevUrl: {
+// 			text: `← Previous Projects`,
+// 			url: page.url.prev
+// 		}
+// 	}),
+// 	...(page.url.next && {
+// 		nextUrl: {
+// 			text: `Next Projects →`,
+// 			url: page.url.next
+// 		}
+// 	})
+// }
+---
+
+<PageLayout meta={meta}>
+	<div class='w-full'>
+		<!-- button back home -->
+		<Button title='Back' href='/' style='button'>
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				width='14'
+				height='14'
+				viewBox='0 0 24 24'
+				slot='icon-before'
+			>
+				<path
+					fill='currentColor'
+					d='m6.921 12.5l5.792 5.792L12 19l-7-7l7-7l.713.708L6.921 11.5H19v1z'
+				>
+				</path>
+			</svg>
+		</Button>
+
+		<!-- title -->
+		<div class='mt-5'>
+			<h1 class='mb-1 text-2xl font-bold'>Projects</h1>
+			<p>Showcasing My Creative Journey Through Code</p>
+		</div>
+
+		<!-- not fix tags -->
+		<!-- <div class='mt-8 flex flex-wrap gap-2'>
+			<button class='rounded-full bg-border px-3 py-1 text-sm text-muted-foreground hover:bg-accent'>
+				All
+			</button>
+			<button class='rounded-full bg-border px-3 py-1 text-sm text-muted-foreground hover:bg-accent'>
+				Web
+			</button>
+			<button class='rounded-full bg-border px-3 py-1 text-sm text-muted-foreground hover:bg-accent'>
+				Mobile
+			</button>
+			<button class='rounded-full bg-border px-3 py-1 text-sm text-muted-foreground hover:bg-accent'>
+				Backend
+			</button>
+			<button class='rounded-full bg-border px-3 py-1 text-sm text-muted-foreground hover:bg-accent'>
+				Frontend
+			</button>
+		</div> -->
+
+		<!-- projects -->
+		<div class='mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2'>
+			{
+				page.data.map((p) => (
+					<ProjectCard
+						href={`/project/${p.slug}/`}
+						heading={p.data.title}
+						subheading={
+							p.data.description.length > 200
+								? p.data.description.slice(0, 200) + '...'
+								: p.data.description
+						}
+						imagePath={
+							p.data.coverImage?.src.src ? p.data.coverImage.src : '/src/assets/coming-soon.png'
+						}
+						altText='maghfur.dev project'
+						tags={p.data.tags}
+					/>
+				))
+			}
+		</div>
+	</div>
+</PageLayout>
