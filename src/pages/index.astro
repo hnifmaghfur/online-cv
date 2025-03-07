@@ -35,7 +35,6 @@ const MAX_POSTS = 10
 const allPosts = await getAllPosts()
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 const allProjects = await getAllProjects()
-const allProjectsByDate = sortProjectByDate(allProjects).slice(0, 2)
 ---
 
 <PageLayout meta={{ title: 'Home' }}>
